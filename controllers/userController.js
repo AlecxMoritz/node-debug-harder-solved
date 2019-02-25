@@ -1,0 +1,4 @@
+const router = require('express').Router();
+const User = require('../models/index').sequelize.import('../models/user');
+
+module.exports = router;

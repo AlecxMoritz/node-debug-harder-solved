@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Weapon = require('../models/index').sequelize.import('../models/weapon');
+const validateSession = require('../middleware/validate-session');
 
 // post
 router.post('/', validateSession, (req, res) => {

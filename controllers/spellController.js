@@ -3,8 +3,16 @@ const Spell = require('../models/index').sequelize.import('../models/spell');
 
 // post
 router.post('/', validateSession, (req, res) => {
+    let spell = req.body.spell;
+
     Spell.create({
-        
+        name : spell.name,
+        flavorText: spell.flavorText,
+        manaCost : spell.manaCost,
+        damage : spell.damage,
+        range : spell.range,
+        type : spell.type,
+        addedBy : req.user.id
     })
         .then(
             createSuccess = newSpell => {
@@ -23,9 +31,11 @@ router.post('/', validateSession, (req, res) => {
 
 // get array of ids
 router.get('/list', validateSession, (req, res) => {
+    const spell = req.body.spell;
 
     Spell.findAll({
         where: {
+            id: spell.ids
         }
     })
         .then(

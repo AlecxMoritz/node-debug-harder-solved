@@ -68,7 +68,7 @@ router.delete('/:id', validateSession, (req, res) => {
     })
         .then(
             deleteSuccess = recordsDeleted => {
-                res.status(200).json(`${recordsDeleted} user(s) deleted.`)
+                res.status(200).json(`${recordsDeleted} class(es) deleted.`)
             },
 
             deleteFail = err => {

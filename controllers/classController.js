@@ -78,6 +78,8 @@ router.delete('/:id', validateSession, (req, res) => {
         )
 })
 
+
+
 // update class info
 router.put('/:id', validateSession, (req, res) => {
     let reqClass = req.body.class;

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Spell = require('../models/index').sequelize.import('../models/spell');
-
+const validateSession = require('../middleware/validate-session');
 // post
 router.post('/', validateSession, (req, res) => {
     let spell = req.body.spell;

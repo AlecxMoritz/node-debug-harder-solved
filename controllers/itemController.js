@@ -44,7 +44,17 @@ router.get('/:id', validateSession, (req, res) => {
 
 // get all
 router.get('/', validateSession, (req, res) => {
-    
+    Item.findAll()
+        .then(
+            findSuccess = items => {
+                res.status(200).json(items);
+            },
+
+            findFail = err => {
+                console.log(err.message);
+                res.status(500).send(err.message);
+            }
+        )
 });
 
 // get array of ids

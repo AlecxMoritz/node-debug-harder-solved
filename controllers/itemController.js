@@ -79,7 +79,28 @@ router.get('/list', validateSession, (req, res) => {
 
 // update
 router.put('/:id', validateSession, (req, res) => {
-    
+    const item = req.body.item;
+
+    Item.update({
+        name : item.name,
+        flavorText : item.flavorText,
+        weight : item.weight,
+        value : item.value,
+    },
+    {
+        where : {
+            id : req.params.id
+        }
+    })
+    .then(
+        updateSuccess = recordsChanged => {
+            res.status(200).send(`${recordsChanged} records(s) changed.`)
+        },
+
+        updateFail = err => {
+            res.status(500).send(err.message);
+        }
+    )
 });
 
 // delete

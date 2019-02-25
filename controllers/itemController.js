@@ -105,7 +105,21 @@ router.put('/:id', validateSession, (req, res) => {
 
 // delete
 router.delete('/:id', validateSession, (req, res) => {
-    
+    Item.destroy({
+        where : {
+            id : req.params.id,
+        }
+    })
+    .then(
+        destroySuccess = recordsChanged => {
+            res.status(200).send(`${recordsChanged} record(s) changed.`);
+        },
+
+        destroyFail = err => {
+            console.log(err.message);
+            res.status(500).send(err.message);
+        }
+    )
 });
 
 

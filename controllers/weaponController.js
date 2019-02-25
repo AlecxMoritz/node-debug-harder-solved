@@ -91,9 +91,11 @@ router.put('/:id', validateSession, (req, res) => {
     Weapon.update({
         name : weapon.name,
         flavorText: weapon.flavorText,
-        manaCost : weapon.manaCost,
         damage : weapon.damage,
-        range : weapon.range,
+        durability : weapon.durability,
+        weight : weapon.weight,
+        value : weapon.value,
+        material : weapon.material,
         type : weapon.type,
     },
         {

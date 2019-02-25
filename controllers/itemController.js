@@ -4,7 +4,23 @@ const validateSession = require('../middleware/validate-session');
 
 // post
 router.post('/', validateSession, (req, res) => {
+    const item = req.body.item;
+    Item.create({
+        name : item.name,
+        flavorText : item.flavorText,
+        weight : item.weight,
+        value : item.value,
+        addedBy : req.user.id
+    })
+    .then(
+        createSuccess = newItem => {
+            res.status(200).json(newItem);
+        },
 
+        createFail = err => {
+            console.log(err.message);
+            res.status(500).send(err.message);
+        })
 });
 
 // get by id

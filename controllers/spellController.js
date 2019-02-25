@@ -25,10 +25,6 @@ router.post('/', validateSession, (req, res) => {
             })
 });
 
-
-
-
-
 // get array of ids
 router.get('/list', validateSession, (req, res) => {
     const spell = req.body.spell;
@@ -90,7 +86,12 @@ router.put('/:id', validateSession, (req, res) => {
     const spell = req.body.spell;
 
     Spell.update({
-        
+        name : spell.name,
+        flavorText: spell.flavorText,
+        manaCost : spell.manaCost,
+        damage : spell.damage,
+        range : spell.range,
+        type : spell.type,
     },
         {
             where: {

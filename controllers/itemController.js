@@ -25,7 +25,21 @@ router.post('/', validateSession, (req, res) => {
 
 // get by id
 router.get('/:id', validateSession, (req, res) => {
-    
+    Item.findOne({
+        where: {
+            id : req.params.id
+        }
+    })
+    .then(
+        findSuccess = item => {
+            res.status(200).json(item);
+        },
+
+        findFail = err => {
+            console.log(err.message);
+            res.status(500).send(err.message);
+        }
+    )
 });
 
 // get all

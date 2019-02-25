@@ -8,9 +8,11 @@ router.post('/', validateSession, (req, res) => {
     Weapon.create({
         name : weapon.name,
         flavorText: weapon.flavorText,
-        manaCost : weapon.manaCost,
         damage : weapon.damage,
-        range : weapon.range,
+        durability : weapon.durability,
+        weight : weapon.weight,
+        value : weapon.value,
+        material : weapon.material,
         type : weapon.type,
         addedBy : req.user.id
     })
@@ -68,7 +70,7 @@ router.get('/:id', validateSession, (req, res) => {
 
 // get all
 router.get('/', validateSession, (req, res) => {
-    Weapons.findAll()
+    Weapon.findAll()
         .then(
             findSuccess = weapon => {
                 res.status(200).json(weapon);

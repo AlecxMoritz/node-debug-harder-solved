@@ -8,7 +8,7 @@ router.post('/token', (req, res) => {
 
     User.findOne({
         where: {
-            email: requser.email
+            email: reqUser.email
         }
     })
     .then(
@@ -42,7 +42,7 @@ router.post('/create', (req, res) => {
     User.create({
         fullName: user.fullName,
         email: user.email,
-        password: bcrypt.hashSync(user.password)
+        password: bcrypt.hashSync(user.password, 12)
     })
         .then(
             createSuccess = newUser => {

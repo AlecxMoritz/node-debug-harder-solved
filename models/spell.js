@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     damage: DataTypes.DECIMAL,
     range: DataTypes.DECIMAL,
     type: DataTypes.STRING,
-    addedBy: DataTypes.STRING
+    addedBy: DataTypes.INTEGER
   }, {});
   Spell.associate = function(models) {
     // associations can be defined here

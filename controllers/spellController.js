@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Spell = require('../models/index').import('../models/spell');
+const Spell = require('../models/index').sequelize.import('../models/spell');
 const validateSession = require('../middleware/validate-session');
 
 // post
@@ -13,7 +13,7 @@ router.post('/', validateSession, (req, res) => {
         damage : spell.damage,
         range : spell.range,
         type : spell.type,
-        addedBy : req.user.fullName
+        addedBy : req.user.id
     })
         .then(
             createSuccess = newSpell => {
@@ -51,7 +51,7 @@ router.get('/', validateSession, (req, res) => {
     Spell.findAll()
         .then(
             findSuccess = spells => {
-                res.status(200).json(spell);
+                res.status(200).json(spells);
             },
 
             findFail = err => {
@@ -94,7 +94,7 @@ router.put('/:id', validateSession, (req, res) => {
 router.delete('/:id', validateSession, (req, res) => {
     Spell.destroy({
         where: {
-            id: req.params.name,
+            id: req.params.id,
         }
     })
         .then(

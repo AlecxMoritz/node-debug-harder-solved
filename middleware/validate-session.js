@@ -9,7 +9,7 @@ module.exports = function(req, res, next) {
 
         if(!token) res.status(403).send('No token provided')
 
-        jwt.verify(token, 'not a tru secret', (err, decoded) => {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 
             if(decoded) {
                 User.findOne({

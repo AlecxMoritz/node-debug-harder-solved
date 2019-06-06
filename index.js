@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv');
 require('./models/index');
 
 const Express = require('express');
@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const app = Express()
 const routes = require('./routes');
 
-app.use(bodyParser.json());
 
 routes(app);
 

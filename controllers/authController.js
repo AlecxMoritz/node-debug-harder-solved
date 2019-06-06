@@ -3,12 +3,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/index').sequelize.import('../models/user');
 
-router.post('/', (req, res) => {
+router.post('/token', (req, res) => {
     let reqUser = req.body.user;
 
     User.findOne({
         where: {
-            email: reqUser.email
+            email: requser.email
         }
     })
     .then(
@@ -35,5 +35,24 @@ router.post('/', (req, res) => {
         }
     )
 })
+
+router.post('/create', (req, res) => {
+    const user = req.body.user;
+
+    User.create({
+        fullName: user.fullName,
+        email: user.email,
+        password: bcrypt.hashSync(user.password)
+    })
+        .then(
+            createSuccess = newUser => {
+                res.status(200).json(newUser);
+            },
+
+            createFail = err => {
+                console.log(err.message);
+                res.status(500).send(err.message);
+            });
+});
 
 module.exports = router;

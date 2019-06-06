@@ -6,7 +6,8 @@ const validateSession = require('../middleware/validate-session');
 router.get('/:id', validateSession, (req, res) => {
     Class.findOne({
         where: {
-            id: req.params.id
+            id: req.params.id,
+            addedBy : req.body.user.id
         }
     })
         .then(
@@ -21,7 +22,7 @@ router.get('/:id', validateSession, (req, res) => {
 });
 
 router.get('/', validateSession, (req, res) => {
-    Class.findAll()
+    Class.findAll({ where : { id : req.user.id }})
         .then(
             findSuccess = classes => {
                 res.status(200).json(classes);
@@ -95,7 +96,7 @@ router.put('/:id', validateSession, (req, res) => {
         charisma: reqClass.charisma,
     }, {
             where: {
-                id: req.params.id
+                id: req.params.class
             }
         })
         .then(

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Spell = require('../models/index').sequelize.import('../models/spell');
+const Spell = require('../models/index').import('../models/spell');
 const validateSession = require('../middleware/validate-session');
 
 // post
@@ -13,7 +13,7 @@ router.post('/', validateSession, (req, res) => {
         damage : spell.damage,
         range : spell.range,
         type : spell.type,
-        addedBy : req.user.id
+        addedBy : req.user.fullName
     })
         .then(
             createSuccess = newSpell => {
@@ -24,27 +24,6 @@ router.post('/', validateSession, (req, res) => {
                 console.log(err.message);
                 res.status(500).send(err.message);
             })
-});
-
-// get array of ids
-router.get('/list', validateSession, (req, res) => {
-    const spell = req.body.spell;
-
-    Spell.findAll({
-        where: {
-            id: spell.ids
-        }
-    })
-        .then(
-            findSuccess = spells => {
-                res.status(200).json(spells);
-            },
-
-            findFail = err => {
-                console.log(err.message);
-                res.status(500).send(err.message);
-            }
-        )
 });
 
 // get by id
@@ -72,7 +51,7 @@ router.get('/', validateSession, (req, res) => {
     Spell.findAll()
         .then(
             findSuccess = spells => {
-                res.status(200).json(spells);
+                res.status(200).json(spell);
             },
 
             findFail = err => {
@@ -96,7 +75,8 @@ router.put('/:id', validateSession, (req, res) => {
     },
         {
             where: {
-                id: req.params.id
+                id: req.params.id,
+                addedBy : req.user.id
             }
         })
         .then(
@@ -114,7 +94,7 @@ router.put('/:id', validateSession, (req, res) => {
 router.delete('/:id', validateSession, (req, res) => {
     Spell.destroy({
         where: {
-            id: req.params.id,
+            id: req.params.name,
         }
     })
         .then(

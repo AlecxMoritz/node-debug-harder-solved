@@ -1,6 +1,6 @@
-# inventory-manager-data
+# Node Server Debug Challenge Lvl 2
 
-Experimenting with Sequelize CLI, migrations and seeders
+At least 12 issues to find.
 
 ## Major Dependencies
 Sequelize & Sequelize CLI
@@ -14,7 +14,7 @@ body-parser
 ### Dev Dependencies
 Nodemon
 
-#### API Documentation
-Documentation for the end points can be found at
-
-https://documenter.getpostman.com/view/4045844/S11GT1Mq
+## You will need the following in a custom .env file
+PORT - your port number
+PASS - your db password
+JWT_SECRET - custom secret

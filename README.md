@@ -14,7 +14,11 @@ body-parser
 ### Dev Dependencies
 Nodemon
 
-## You will need the following in a custom .env file
+### You will need the following in a custom .env file
 PORT - your port number
+
 PASS - your db password
+
 JWT_SECRET - custom secret
+
+### You will also need a new database named 'debug-db'
